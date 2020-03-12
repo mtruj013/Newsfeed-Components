@@ -85,7 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This is a title',
+    date: 'March, 12, 2020',
+    firstParagraph: 'Monocle ipsum dolor sit amet global artisanal Comme des Garçons ryokan hand-crafted. Intricate smart Marylebone bureaux cosy. Fast Lane Ginza K-pop, smart alluring boulevard Asia-Pacific signature. Lovely Washlet Muji, bulletin intricate pintxos international. Elegant carefully curated Singapore, delightful flat white perfect remarkable quality of life bureaux first-class classic Beams.',
+    secondParagraph: 'Ginza delightful impeccable cutting-edge Beams. Soft power premium Porter craftsmanship quality of life, sharp Sunspel impeccable. Bespoke boutique Ginza vibrant conversation Helsinki charming Porter Shinkansen espresso the highest quality international hub first-class classic. Ettinger bureaux sophisticated, international ANA izakaya Lufthansa Airbus A380 Baggu iconic vibrant sleepy eclectic Melbourne. Ginza Marylebone sophisticated, smart alluring remarkable Swiss the highest quality emerging Toto the best Zürich.',
+    thirdParagraph: 'Destination Zürich conversation remarkable, Fast Lane Porter St Moritz Melbourne smart. Essential Boeing 787 carefully curated Ginza Scandinavian Gaggenau, intricate hand-crafted boulevard efficient classic. Concierge liveable Melbourne international extraordinary Nordic. Conversation K-pop handsome iconic the highest quality joy Washlet. Helsinki conversation delightful joy, Lufthansa signature bespoke. Ryokan Washlet the highest quality espresso bespoke Tsutaya intricate Toto. Wardrobe Ettinger Swiss, liveable Nordic Tsutaya ANA.'
   }
+    
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -112,3 +120,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(data){
+  //create elements
+  const articleContainer = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articlePara1 = document.createElement('p');
+  const articlePara2 = document.createElement('p');
+  const articlePara3 = document.createElement('p');
+  const artcileSpan = document.createElement('span');
+  //nest elements
+  articleContainer.append(articleTitle);
+  articleContainer.append(articleDate);
+  articleContainer.append(articlePara1);
+  articleContainer.append(articlePara2);
+  articleContainer.append(articlePara3);
+  articleContainer.append(artcileSpan);
+  //add classes
+  articleContainer.classList.add('article');
+  articleDate.classList.add('date');
+  artcileSpan.classList.add('expandButton');
+  //set text content
+  articleTitle.textContent = data.title;
+  articleDate.textContent = data.date;
+  articlePara1.textContent = data.firstParagraph;
+  articlePara2.textContent = data.secondParagraph;
+  articlePara3.textContent = data.thirdParagraph;
+  artcileSpan.textContent = 'expand';
+  //add event listener to span
+  artcileSpan.addEventListener('click', (event) =>{
+    articleContainer.classList.toggle('article-open');
+  })
+
+  return articleContainer;
+}
+
+//grab parent element
+let parentDiv = document.querySelector('.articles');
+//mapt through data
+data.map(function(item){
+   parentDiv.append(createArticle(item));
+})
+
+
